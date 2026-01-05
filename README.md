@@ -1,4 +1,4 @@
-# RAG-Tutorials
+
 
 This project demonstrates a Retrieval-Augmented Generation (RAG) pipeline for processing PDF documents, creating embeddings, and querying a knowledge base to augment LLM responses.
 

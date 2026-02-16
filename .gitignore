@@ -26,4 +26,4 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 data/vector_store/
-echo "notebook/pdf_loader.ipynb" 
+notebook/pdf_loader.ipynb

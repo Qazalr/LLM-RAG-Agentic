@@ -1,3 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.env.local
+.DS_Store
+
+# Data
+data/
+backend/chroma_db/
+backend/vector_store/
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log
+
 .env
 .venv/
 __pycache__/

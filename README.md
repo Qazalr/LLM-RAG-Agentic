@@ -1,72 +1,69 @@
+# Agent RAG Chat
 
+A full-stack RAG (Retrieval-Augmented Generation) application built with **FastAPI** (Backend) and **Next.js** (Frontend).
 
-This project demonstrates a Retrieval-Augmented Generation (RAG) pipeline for processing PDF documents, creating embeddings, and querying a knowledge base to augment LLM responses.
+## Features
+- **RAG Pipeline**: Retrieves context from PDF documents to answer user queries using OpenAI models.
+- **Agentic Behavior**: Falls back to general knowledge if context is missing, and supports multilingual replies.
+- **Modern UI**: Dark-themed chat interface with streaming responses and conversation history.
 
-## Architecture
+## Prerequisites
+- Python 3.10+
+- Node.js 18+
+- OpenAI API Key
 
-### RAG Pipeline Flow
-![RAG Architecture](images/rag_architecture.png)
+## Setup
 
-The core mechanism of this project follows the RAG architecture shown above:
-1. **Data Ingestion**: PDF documents and other data sources are loaded.
-2. **Parsing & Chunking**: The text involves parsing the raw data and splitting it into manageable chunks.
-3. **Embedding**: Text chunks are converted into vector embeddings.
-4. **Vector Database**: These embeddings are stored in a Vector Database (like ChromaDB or FAISS) for efficient similarity search.
-5. **Retrieval**: When a user asks a question, the system queries the Vector DB to find the most relevant context.
-6. **Generation**: The retrieved context + the user's prompt are sent to the LLM to generate an accurate, grounded response.
+### 1. Backend
+1. Create a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Configure Environment:
+   - Copy `.env.example` to `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Add your OpenAI API Key to `.env`.
 
-### LLM in Workspace
-![LLM Workflow](images/llm_workflow.png)
+4. **Ingest Data** (First time setup):
+   - Place your PDFs in `data/pdf/`.
+   - Run the ingestion script:
+     ```bash
+     python3 -m backend.ingest
+     ```
 
-This diagram helps visualize how the Large Language Model (LLM) fits within the broader workspace and application logic, illustrating the limitations of a standalone LLM (limitations in knowledge cutoff, hallucinations) and how integrating it with external data sources (like in this workspace) enhances its capabilities.
+5. Start the server:
+   ```bash
+   ./start_backend.sh
+   # API runs at http://localhost:8000
+   ```
+
+### 2. Frontend
+1. Navigate to the web directory:
+   ```bash
+   cd web
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   # App runs at http://localhost:3000
+   ```
 
 ## Project Structure
+- `backend/`: FastAPI application and RAG logic.
+- `web/`: Next.js frontend application.
+- `data/`: PDF documents and vector store database.
+- `notebooks/`: Exploration and data processing notebooks.
 
-- `notebook/`: Contains Jupyter notebooks for the RAG implementation (e.g., `pdf_loader.ipynb`).
-- `data/`: Directory for storing raw PDF documents and persisted vector stores.
-- `src/`: Source code modules.
-- `requirements.txt`: Python dependencies.
-- `.env`: Configuration file for API keys (e.g., OpenAI API Key).
-
-## Setup & Installation
-
-1. **Clone the repository** (if you haven't already):
-    ```bash
-    git clone https://github.com/krishnaik06/RAG-Tutorials.git
-    cd RAG-Tutorials
-    ```
-
-2. **Create and activate a virtual environment**:
-    ```bash
-    python -m venv .venv
-    source .venv/bin/activate  # On Mac/Linux
-    # .venv\Scripts\activate   # On Windows
-    ```
-
-3. **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-4. **Environment Configuration**:
-    Create a `.env` file in the root directory and add your keys:
-    ```
-    OPENAI_API_KEY=your_api_key_here
-    ```
-
-## Usage
-
-You can explore the RAG implementation by running the provided notebooks:
-
-```bash
-jupyter notebook notebook/pdf_loader.ipynb
-```
-Follow the steps in the notebook to load PDFs, create the vector store, and ask questions.
-
-## Contributing
-
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+## License
+MIT

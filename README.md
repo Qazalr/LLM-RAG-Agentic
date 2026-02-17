@@ -59,6 +59,12 @@ A full-stack RAG (Retrieval-Augmented Generation) application built with **FastA
    # App runs at http://localhost:3000
    ```
 
+## Architecture
+![RAG Architecture](images/rag_architecture.png)
+
+### LLM Workflow
+![LLM Workflow](images/llm_workflow.png)
+
 ## Project Structure
 - `backend/`: FastAPI application and RAG logic.
 - `web/`: Next.js frontend application.
